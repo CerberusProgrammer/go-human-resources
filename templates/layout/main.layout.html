@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}} - Resto</title>
+    <!-- HTMX desde CDN -->
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+
+<body>
+    <nav class="macos-navbar sticky-top">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="/" class="text-decoration-none">
+                    <h1 class="h4 m-0 d-flex align-items-center">
+                        <i class="bi bi-cup-hot me-2"></i>
+                        <span>Human Resources</span>
+                    </h1>
+                </a>
+                <div>
+                    <span class="text-secondary me-3">{{.CurrentTime}}</span>
+                    <button class="btn macos-btn" id="theme-toggle">
+                        <i class="bi bi-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <!-- Menú lateral -->
+            <div class="col-md-3">
+                <div class="sidebar">
+                    <ul class="sidebar-menu">
+                        <li><a href="/" class="{{if eq .ActivePage " dashboard"}}active{{end}}">
+                                <i class="bi bi-speedometer2"></i> Home
+                            </a></li>
+                    </ul>
+
+                    <div class="sidebar-heading">Administración</div>
+                    <ul class="sidebar-menu">
+                        <li><a href="/persons" class="{{if eq .ActivePage " kitchen"}}active{{end}}">
+                                <i class="bi bi-fire"></i> Cocina
+                            </a></li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <main>
+                    {{embed}}
+                </main>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
