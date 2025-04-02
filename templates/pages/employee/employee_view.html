@@ -3,18 +3,16 @@
 {{define "embed-employee-view"}}
 <section>
     <h2>Employee Details</h2>
-    <div>
-        {{template "pages/employee/partials/employee_partial_data" .}}
+    <div class="employee-actions">
+        <a href="/employees/{{.Employee.ID}}/edit" class="button">Edit</a>
+        <form action="/employees/{{.Employee.ID}}/delete" method="POST" style="display:inline;">
+            <button type="submit" class="button delete"
+                onclick="return confirm('Are you sure you want to delete this employee?')">Delete</button>
+        </form>
+        <a href="/employees" class="button">Back to List</a>
     </div>
 
-    <div class="actions">
-        <a href="/employees" class="button">Back to List</a>
-        <a href="/employees/{{.Employee.ID}}/edit" class="button">Edit</a>
-        <form action="/employees/{{.Employee.ID}}/delete" method="POST"
-            onsubmit="return confirm('Are you sure you want to delete this employee?')">
-            <button type="submit" class="button delete">Delete</button>
-        </form>
-    </div>
+    {{template "pages/employee/partials/employee_partial_data" .}}
 </section>
 {{end}}
 

@@ -1,13 +1,92 @@
 {{define "pages/employee/partials/employee_partial_data"}}
 <div class="employee-data">
-    <p><strong>ID:</strong> {{.Employee.ID}}</p>
-    <p><strong>Name:</strong> {{.Employee.FirstName}} {{.Employee.LastName}}</p>
-    <p><strong>Email:</strong> {{.Employee.Email}}</p>
-    <p><strong>Phone:</strong> {{.Employee.Phone}}</p>
-    <p><strong>Position:</strong> {{.Employee.Position}}</p>
-    <p><strong>Department:</strong> {{.Employee.Department}}</p>
-    <p><strong>Hire Date:</strong> {{.Employee.HireDate.Format "2006-01-02"}}</p>
-    <p><strong>Salary:</strong> {{.Employee.Salary}}</p>
-    <p><strong>Status:</strong> {{if .Employee.IsActive}}Active{{else}}Inactive{{end}}</p>
+    <!-- Profile Section -->
+    <div class="profile-section">
+        {{if .Employee.ProfilePicture}}
+        <img src="{{.Employee.ProfilePicture}}" alt="{{.Employee.FirstName}} {{.Employee.LastName}}"
+            class="profile-picture">
+        {{else}}
+        <div class="profile-picture-placeholder">{{slice .Employee.FirstName 0 1}}{{slice .Employee.LastName 0 1}}</div>
+        {{end}}
+        <h3>{{.Employee.FirstName}} {{.Employee.LastName}}</h3>
+        <p class="employee-position">{{.Employee.Position}}</p>
+        <p class="employee-department">{{.Employee.Department}}</p>
+    </div>
+
+    <!-- Basic Information -->
+    <div class="data-section">
+        <h4>Basic Information</h4>
+        <p><strong>ID:</strong> {{.Employee.ID}}</p>
+        <p><strong>Email:</strong> {{.Employee.Email}}</p>
+        <p><strong>Phone:</strong> {{.Employee.Phone}}</p>
+        <p><strong>Status:</strong> {{if .Employee.IsActive}}<span class="status-active">Active</span>{{else}}<span
+                class="status-inactive">Inactive</span>{{end}}</p>
+        <p><strong>Employment Type:</strong> {{.Employee.EmploymentType}}</p>
+        <p><strong>Date of Birth:</strong> {{if not .Employee.DateOfBirth.IsZero}}{{.Employee.DateOfBirth.Format
+            "2006-01-02"}}{{end}}</p>
+        <p><strong>Hire Date:</strong> {{if not .Employee.HireDate.IsZero}}{{.Employee.HireDate.Format
+            "2006-01-02"}}{{end}}</p>
+    </div>
+
+    <!-- Address -->
+    <div class="data-section">
+        <h4>Address</h4>
+        <p><strong>Street:</strong> {{.Employee.Address}}</p>
+        <p><strong>City:</strong> {{.Employee.City}}</p>
+        <p><strong>State/Province:</strong> {{.Employee.State}}</p>
+        <p><strong>Postal Code:</strong> {{.Employee.PostalCode}}</p>
+        <p><strong>Country:</strong> {{.Employee.Country}}</p>
+    </div>
+
+    <!-- Financial Information -->
+    <div class="data-section">
+        <h4>Financial Information</h4>
+        <p><strong>Salary:</strong> {{.Employee.Salary}} {{.Employee.SalaryCurrency}}</p>
+        <p><strong>Payment Frequency:</strong> {{.Employee.SalaryFrequency}}</p>
+        <p><strong>SSN:</strong>
+            {{if .Employee.SSN}}
+            {{if ge (len .Employee.SSN) 4}}
+            xxx-xx-{{slice .Employee.SSN (sub (len .Employee.SSN) 4)}}
+            {{else}}
+            {{.Employee.SSN}}
+            {{end}}
+            {{else}}
+            Not provided
+            {{end}}
+        </p>
+    </div>
+
+    <!-- Banking Information -->
+    <div class="data-section">
+        <h4>Banking Information</h4>
+        <p><strong>Bank Name:</strong> {{.Employee.BankName}}</p>
+        <p><strong>Account Number:</strong>
+            {{if .Employee.BankAccount}}
+            {{if ge (len .Employee.BankAccount) 4}}
+            xxxx-xxxx-xxxx-{{slice .Employee.BankAccount (sub (len .Employee.BankAccount) 4)}}
+            {{else}}
+            {{.Employee.BankAccount}}
+            {{end}}
+            {{else}}
+            Not provided
+            {{end}}
+        </p>
+        <p><strong>Routing Number:</strong> {{.Employee.BankRouting}}</p>
+    </div>
+
+    <!-- Emergency Contact -->
+    <div class="data-section">
+        <h4>Emergency Contact</h4>
+        <p><strong>Name:</strong> {{.Employee.EmergencyContactName}}</p>
+        <p><strong>Phone:</strong> {{.Employee.EmergencyContactPhone}}</p>
+        <p><strong>Email:</strong> {{.Employee.EmergencyContactEmail}}</p>
+    </div>
+
+    <!-- System Information -->
+    <div class="data-section">
+        <h4>System Information</h4>
+        <p><strong>Created:</strong> {{.Employee.CreatedAt.Format "2006-01-02 15:04"}}</p>
+        <p><strong>Last Updated:</strong> {{.Employee.UpdatedAt.Format "2006-01-02 15:04"}}</p>
+    </div>
 </div>
 {{end}}

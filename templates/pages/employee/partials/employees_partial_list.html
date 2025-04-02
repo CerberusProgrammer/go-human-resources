@@ -5,8 +5,11 @@
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
+            <th>Phone</th>
             <th>Position</th>
             <th>Department</th>
+            <th>Type</th>
+            <th>Status</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -14,20 +17,30 @@
         {{range .Employees}}
         <tr id="employee-{{.ID}}">
             <td>{{.ID}}</td>
-            <td>{{.FirstName}} {{.LastName}}</td>
+            <td>
+                {{if .ProfilePicture}}
+                <img src="{{.ProfilePicture}}" alt="{{.FirstName}}" class="small-profile-pic">
+                {{end}}
+                {{.FirstName}} {{.LastName}}
+            </td>
             <td>{{.Email}}</td>
+            <td>{{.Phone}}</td>
             <td>{{.Position}}</td>
             <td>{{.Department}}</td>
+            <td>{{.EmploymentType}}</td>
+            <td>{{if .IsActive}}<span class="status-active">Active</span>{{else}}<span
+                    class="status-inactive">Inactive</span>{{end}}</td>
             <td>
-                <a href="/employees/{{.ID}}">View</a>
-                <a href="/employees/{{.ID}}/edit">Edit</a>
+                <a href="/employees/{{.ID}}" class="button small">View</a>
+                <a href="/employees/{{.ID}}/edit" class="button small edit">Edit</a>
                 <button hx-delete="/employees/{{.ID}}" hx-target="#employee-{{.ID}}" hx-swap="outerHTML"
-                    hx-confirm="Are you sure you want to delete this employee?">Delete</button>
+                    hx-confirm="Are you sure you want to delete this employee?"
+                    class="button small delete">Delete</button>
             </td>
         </tr>
         {{else}}
         <tr>
-            <td colspan="6">No employees found</td>
+            <td colspan="9">No employees found</td>
         </tr>
         {{end}}
     </tbody>

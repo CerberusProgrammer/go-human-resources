@@ -1,8 +1,10 @@
 package main
 
 import (
+	"html/template"
 	"log"
 	"os"
+	"path/filepath"
 
 	"go-human-resources/src"
 	"go-human-resources/src/employee"
@@ -29,15 +31,46 @@ func main() {
 
 	// Check if templates directory exists
 	templatesPath := "./templates"
-	if _, err := os.Stat(templatesPath); os.IsNotExist(err) {
-		log.Fatalf("Templates directory not found at %s", templatesPath)
-	}
-	log.Printf("Templates directory exists at %s", templatesPath)
 
-	// Initialize template engine - much simpler setup
+	// After creating the template engine...
 	engine := html.New(templatesPath, ".html")
 	engine.Reload(true) // Enable reloading for development
 
+	// Add helper functions to handle string operations safely
+	engine.AddFunc("sub", func(a, b int) int {
+		return a - b
+	})
+
+	engine.AddFunc("ge", func(a, b int) bool {
+		return a >= b
+	})
+
+	engine.AddFunc("safe", func(s string) template.HTML {
+		return template.HTML(s)
+	})
+
+	// Force load templates in the correct order
+	templatePaths := []string{
+		"layout/main.layout.html",
+		"index.html",
+		"pages/error.html",
+		"pages/employee/employee_view.html",
+		"pages/employee/employee_edit_view.html",
+		"pages/employee/employee_create_view.html",
+		"pages/employee/employees_view.html",
+		"pages/employee/partials/employee_partial_data.html",
+		"pages/employee/partials/employees_partial_list.html",
+	}
+
+	for _, path := range templatePaths {
+		fullPath := filepath.Join(templatesPath, path)
+		if _, err := os.Stat(fullPath); os.IsNotExist(err) {
+			log.Printf("Warning: Template file not found: %s", fullPath)
+		} else {
+			log.Printf("Loading template: %s", path)
+			engine.Load()
+		}
+	}
 	// Create fiber app with the template engine
 	app := fiber.New(fiber.Config{
 		Views: engine,

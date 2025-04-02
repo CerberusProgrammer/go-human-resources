@@ -66,8 +66,19 @@ table th {
     background-color: #f44336;
 }
 
+/* Add these styles to your existing CSS file */
+
+/* Forms layout improvements */
 form {
     max-width: 800px;
+    margin: 0 auto;
+}
+
+form h3 {
+    margin-top: 2rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+    color: #333;
 }
 
 .form-group {
@@ -77,22 +88,139 @@ form {
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
+    font-weight: 500;
 }
 
-.form-group input {
+.form-group input,
+.form-group select {
     width: 100%;
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    font-size: 16px;
 }
 
 .form-actions {
-    margin-top: 1rem;
+    margin-top: 2rem;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
 }
 
-footer {
-    background-color: #f2f2f2;
+/* Employee data display improvements */
+.employee-data {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .employee-data {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.profile-section {
+    grid-column: 1 / -1;
     text-align: center;
     padding: 1rem;
-    margin-top: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.profile-picture-placeholder {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #4CAF50;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    margin: 0 auto 1rem;
+}
+
+.data-section {
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.data-section h4 {
+    margin-top: 0;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.status-active {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.status-inactive {
+    color: #f44336;
+    font-weight: bold;
+}
+
+/* Table improvements */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+table th,
+table td {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: left;
+}
+
+table th {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table tbody tr:hover {
+    background-color: #e9e9e9;
+}
+
+.small-profile-pic {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.button.small {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    margin: 2px;
+}
+
+.button.edit {
+    background-color: #2196F3;
+}
+
+.button.delete {
+    background-color: #f44336;
 }
