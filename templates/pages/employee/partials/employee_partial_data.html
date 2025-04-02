@@ -1,0 +1,13 @@
+{{define "pages/employee/partials/employee_partial_data"}}
+<div class="employee-data">
+    <p><strong>ID:</strong> {{.Employee.ID}}</p>
+    <p><strong>Name:</strong> {{.Employee.FirstName}} {{.Employee.LastName}}</p>
+    <p><strong>Email:</strong> {{.Employee.Email}}</p>
+    <p><strong>Phone:</strong> {{.Employee.Phone}}</p>
+    <p><strong>Position:</strong> {{.Employee.Position}}</p>
+    <p><strong>Department:</strong> {{.Employee.Department}}</p>
+    <p><strong>Hire Date:</strong> {{.Employee.HireDate.Format "2006-01-02"}}</p>
+    <p><strong>Salary:</strong> {{.Employee.Salary}}</p>
+    <p><strong>Status:</strong> {{if .Employee.IsActive}}Active{{else}}Inactive{{end}}</p>
+</div>
+{{end}}

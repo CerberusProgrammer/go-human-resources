@@ -1,0 +1,12 @@
+{{template "layout/main" .}}
+
+{{define "embed-error"}}
+<section class="error-page">
+    <h2>Error</h2>
+    <p>{{.Message}}</p>
+    <a href="javascript:history.back()" class="button">Go Back</a>
+    <a href="/" class="button">Home</a>
+</section>
+{{end}}
+
+{{define "embed"}}{{template "embed-error" .}}{{end}}

@@ -1,0 +1,62 @@
+{{template "layout/main" .}}
+
+{{define "embed-employee-edit"}}
+<section>
+    <h2>Edit Employee</h2>
+    <form action="/employees/{{.Employee.ID}}" method="POST" enctype="application/x-www-form-urlencoded">
+        <div class="form-group">
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" value="{{.Employee.FirstName}}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" value="{{.Employee.LastName}}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{.Employee.Email}}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone" value="{{.Employee.Phone}}">
+        </div>
+
+        <div class="form-group">
+            <label for="position">Position:</label>
+            <input type="text" id="position" name="position" value="{{.Employee.Position}}">
+        </div>
+
+        <div class="form-group">
+            <label for="department">Department:</label>
+            <input type="text" id="department" name="department" value="{{.Employee.Department}}">
+        </div>
+
+        <div class="form-group">
+            <label for="hire_date">Hire Date:</label>
+            <input type="date" id="hire_date" name="hire_date" value="{{.Employee.HireDate.Format " 2006-01-02"}}">
+        </div>
+
+        <div class="form-group">
+            <label for="salary">Salary:</label>
+            <input type="number" id="salary" name="salary" step="0.01" value="{{.Employee.Salary}}">
+        </div>
+
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="is_active" {{if .Employee.IsActive}}checked{{end}}>
+                Active Employee
+            </label>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit">Update Employee</button>
+            <a href="/employees" class="button">Cancel</a>
+        </div>
+    </form>
+</section>
+{{end}}
+
+{{define "embed"}}{{template "embed-employee-edit" .}}{{end}}

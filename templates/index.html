@@ -1,0 +1,18 @@
+{{template "layout/main" .}}
+
+{{define "embed-index"}}
+<section>
+    <h2>Welcome to GO Human Resources</h2>
+    <p>Manage your organization's human resources efficiently.</p>
+
+    <div>
+        <h3>Quick Links</h3>
+        <ul>
+            <li><a href="/employees">View All Employees</a></li>
+            <li><a href="/employees/new">Add New Employee</a></li>
+        </ul>
+    </div>
+</section>
+{{end}}
+
+{{define "embed"}}{{template "embed-index" .}}{{end}}

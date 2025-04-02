@@ -1,0 +1,14 @@
+{{template "layout/main" .}}
+
+{{define "embed-employees-list"}}
+<section>
+    <h2>Employees</h2>
+    <a href="/employees/new" class="button">Add New Employee</a>
+
+    <div>
+        {{template "pages/employee/partials/employees_partial_list" .}}
+    </div>
+</section>
+{{end}}
+
+{{define "embed"}}{{template "embed-employees-list" .}}{{end}}

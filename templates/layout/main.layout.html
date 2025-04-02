@@ -1,62 +1,48 @@
+{{define "layout/main"}}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{.Title}} - Resto</title>
-    <!-- HTMX desde CDN -->
-    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-</head>G
+    <title>GO Human Resources</title>
+    <script src="https://unpkg.com/htmx.org@1.9.9"></script>
+    <link rel="stylesheet" href="/static/styles/index.css">
+</head>
 
 <body>
-    <nav class="macos-navbar sticky-top">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center">
-                <a href="/" class="text-decoration-none">
-                    <h1 class="h4 m-0 d-flex align-items-center">
-                        <i class="bi bi-cup-hot me-2"></i>
-                        <span>Human Resources</span>
-                    </h1>
-                </a>
-                <div>
-                    <span class="text-secondary me-3">{{.CurrentTime}}</span>
-                    <button class="btn macos-btn" id="theme-toggle">
-                        <i class="bi bi-moon"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <header>
+        <h1>GO HR</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/employees">Employees</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <div class="container">
-        <div class="row">
-            <!-- Menú lateral -->
-            <div class="col-md-3">
-                <div class="sidebar">
-                    <ul class="sidebar-menu">
-                        <li><a href="/" class="{{if eq .ActivePage " dashboard"}}active{{end}}">
-                                <i class="bi bi-speedometer2"></i> Home
-                            </a></li>
-                    </ul>
+    <main>
+        {{if eq .CurrentTemplate "employees"}}
+        {{template "embed-employees-list" .}}
+        {{else if eq .CurrentTemplate "employee-create"}}
+        {{template "embed-employee-create" .}}
+        {{else if eq .CurrentTemplate "employee-edit"}}
+        {{template "embed-employee-edit" .}}
+        {{else if eq .CurrentTemplate "employee-view"}}
+        {{template "embed-employee-view" .}}
+        {{else if eq .CurrentTemplate "error"}}
+        {{template "embed-error" .}}
+        {{else}}
+        {{template "embed-index" .}}
+        {{end}}
+    </main>
 
-                    <div class="sidebar-heading">Administración</div>
-                    <ul class="sidebar-menu">
-                        <li><a href="/persons" class="{{if eq .ActivePage " kitchen"}}active{{end}}">
-                                <i class="bi bi-fire"></i> Cocina
-                            </a></li>
+    <footer>
+        <p>&copy; 2025 GO Human Resources</p>
+    </footer>
 
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col-md-9">
-                <main>
-                    {{embed}}
-                </main>
-            </div>
-        </div>
-    </div>
+    <script src="/static/scripts/index.js"></script>
 </body>
 
 </html>
+{{end}}

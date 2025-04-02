@@ -7,3 +7,5 @@ Everything free, open-source, and self-hosted.
 # Features
 
 - [ ] Employee Management
+    - [ ] Create, read, update, and delete employee records
+    - [ ] Employee profiles with personal information, job details, and contact information

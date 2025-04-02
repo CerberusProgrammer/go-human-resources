@@ -1,0 +1,62 @@
+{{template "layout/main" .}}
+
+{{define "embed-employee-create"}}
+<section>
+    <h2>Add New Employee</h2>
+    <form action="/employees" method="POST" enctype="application/x-www-form-urlencoded">
+        <div class="form-group">
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone">
+        </div>
+
+        <div class="form-group">
+            <label for="position">Position:</label>
+            <input type="text" id="position" name="position">
+        </div>
+
+        <div class="form-group">
+            <label for="department">Department:</label>
+            <input type="text" id="department" name="department">
+        </div>
+
+        <div class="form-group">
+            <label for="hire_date">Hire Date:</label>
+            <input type="date" id="hire_date" name="hire_date">
+        </div>
+
+        <div class="form-group">
+            <label for="salary">Salary:</label>
+            <input type="number" id="salary" name="salary" step="0.01">
+        </div>
+
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="is_active" checked>
+                Active Employee
+            </label>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit">Save Employee</button>
+            <a href="/employees" class="button">Cancel</a>
+        </div>
+    </form>
+</section>
+{{end}}
+
+{{define "embed"}}{{template "embed-employee-create" .}}{{end}}
